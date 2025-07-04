@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Orçamento Automático</title>
+    <link rel="stylesheet" href="Styles.css" />
+    <script src="Script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  </head>
+  <body>
+    <div id="orcamentoArea">
+      <div class="cabecalho">
+        <img src="belle.png" alt="Logo Bellenzier" />
+      </div>
+
+      <div class="dados-topo">
+        <p id="dataAtual"></p>
+        <h1>ORÇAMENTO: <span id="numeroOrcamento"></span></h1>
+      </div>
+
+      <div class="linha-vertical">
+        <label>
+          A/C:
+          <input type="text" id="ac" placeholder="Cliente" /> </label
+        ><br />
+        <label>
+          CNPJ:
+          <input type="text" id="cnpj" placeholder="00.000.000/0000-00" />
+        </label>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>QT</th>
+            <th>DESCRIÇÃO</th>
+            <th>Pr.Unit (R$)</th>
+            <th>TOTAL (R$)</th>
+          </tr>
+        </thead>
+        <tbody id="corpoTabela">
+          <tr>
+            <td><input type="number" class="qtd" value="1" min="1" /></td>
+            <td>
+              <input
+                type="text"
+                class="descricao"
+                placeholder="Descrição do produto"
+              />
+            </td>
+            <td>
+              <td><input type="number" class="valor" value="0.00" step="0.01" /></td>
+            <td class="subtotal">0.00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button class="botao" onclick="adicionarProduto()">+ Produto</button>
+
+      <div class="totalGeral">TOTAL: R$ <span id="valorTotal">0.00</span></div>
+
+      <div class="info-final">
+        <label>
+          <p></p>
+          Validade Orçamento:
+          <input type="text" id="val" placeholder="validade orçamento" />
+        </label>
+
+        <p></p>
+
+        <label>
+          Condição de pagamento:
+          <input type="text" id="cond" placeholder="Condição de pagamento" />
+        </label>
+
+        <p>Agradecemos o contato.</p>
+        <p>Atenciosamente,</p>
+      </div>
+
+      <div class="rodape">
+        <img src="assin.png" alt="Logo Bellenzier" style="height: 40px" /><br />
+        <strong>CRISTIANE</strong><br />
+        Fone: (51) 3515-8011<br />
+        Whats: (51) 99534-1191<br />
+        BELLENZIER PNEUS LTDA<br />
+        CNPJ: 73.730.129/0009-86
+      </div>
+    </div>
+
+    <button class="botao" onclick="gerarPDF()">Salvar Orçamento em PDF</button>
+  </body>
+</html>

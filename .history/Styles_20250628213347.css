@@ -1,0 +1,85 @@
+  * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    #orcamentoArea {
+      background-color: #fff;
+      max-width: 800px;
+      margin: auto;
+      padding: 25px 30px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    .cabecalho {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .cabecalho img {
+      max-height: 60px;
+      margin: 0 10px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 15px;
+      font-weight: bold;
+    }
+
+    input[type="text"], input[type="number"] {
+      padding: 8px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+
+    .totalGeral {
+      margin-top: 15px;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: right;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-size: 1em;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
