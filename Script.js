@@ -67,23 +67,25 @@ document.addEventListener("DOMContentLoaded", () => {
 function atualizarTotais() {
   let total = 0;
   document.querySelectorAll("#corpoTabela tr").forEach((linha) => {
-    const qtd = parseFloat(linha.querySelector(".qtd")?.value || 0);
-    const valor = parseFloat(linha.querySelector(".valor")?.value || 0);
+    const qtdInput = linha.querySelector(".qtd");
+    const valorInput = linha.querySelector(".valor");
+
+    const qtd = parseFloat(qtdInput?.value.replace(',', '.') || 0);
+    const valor = parseFloat(valorInput?.value.replace(',', '.') || 0);
     const subtotal = qtd * valor;
 
-    // Formata o subtotal com vírgula
-    linha.querySelector(".subtotal").textContent = subtotal
-      .toFixed(2)
-      .replace('.', ',');
+    linha.querySelector(".subtotal").textContent = isNaN(subtotal)
+      ? "0,00"
+      : subtotal.toFixed(2).replace('.', ',');
 
-    total += subtotal;
+    total += isNaN(subtotal) ? 0 : subtotal;
   });
 
-  // Formata o total também com vírgula
   document.getElementById("valorTotal").textContent = total
     .toFixed(2)
     .replace('.', ',');
 }
+
 
 // Formatar valor com vírgula ao sair do campo
  document.querySelectorAll(".valor").forEach((input) => {
@@ -98,13 +100,12 @@ function atualizarTotais() {
     });
   });
 
-
 function adicionarProduto() {
   const linha = document.createElement("tr");
   linha.innerHTML = `
     <td><input type="number" class="qtd" value="1" min="1" /></td>
     <td><input type="text" class="descricao" placeholder="Descrição do produto" /></td>
-    <td><input type="number" class="valor" value="0.00" step="0.01" /></td>
+    <td><input type="text" class="valor" value="0,00" /></td>
     <td class="subtotal">0,00</td>
   `;
   document.getElementById("corpoTabela").appendChild(linha);
@@ -112,9 +113,11 @@ function adicionarProduto() {
   const qtdInput = linha.querySelector(".qtd");
   const valorInput = linha.querySelector(".valor");
 
+  // Recalcula sempre que mudar quantidade ou valor
   qtdInput.addEventListener("input", atualizarTotais);
-  valorInput.addEventListener("input", atualizarTotais); // <--- ESSA LINHA FALTAVA!
+  valorInput.addEventListener("input", atualizarTotais);
 
+  // Formata e atualiza ao sair do campo valor
   valorInput.addEventListener("blur", () => {
     const raw = valorInput.value.replace(',', '.');
     const val = parseFloat(raw);
@@ -123,10 +126,10 @@ function adicionarProduto() {
     } else {
       valorInput.value = '0,00';
     }
-
-    atualizarTotais(); // <- Garante que atualiza depois de formatar!
+    atualizarTotais();
   });
 }
+
 
 
 function visualizarOrcamentoEmNovaPagina() {
