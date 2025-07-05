@@ -66,12 +66,14 @@
             <td>
               <input type="text" class="valor" value="0,00" />
             </td>
-              <td class="subtotal">0,00</td>
+            <td class="subtotal">0,00</td>
           </tr>
         </tbody>
       </table>
 
-      <button class="botao apenas-edicao" onclick="adicionarProduto()">+ Produto</button>
+      <button class="botao apenas-edicao" onclick="adicionarProduto()">
+        + Produto
+      </button>
 
       <div class="totalGeral">TOTAL: R$ <span id="valorTotal">0,00</span></div>
 
@@ -84,6 +86,11 @@
         <label>
           Condição de pagamento:
           <input type="text" id="cond" placeholder="Condição de pagamento" />
+        </label>
+
+        <label>
+          Mensagem:
+          <input type="text" id="mens" placeholder="Mensagem adicional" />
         </label>
 
         <p>Agradecemos o contato.</p>
@@ -99,7 +106,7 @@
         CNPJ: 73.730.129/0009-86
       </div>
     </div>
-
+  
     <button class="botao" onclick="visualizarOrcamentoEmNovaPagina()">
       Visualizar na Página
     </button>

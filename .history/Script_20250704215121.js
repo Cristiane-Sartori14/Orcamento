@@ -160,8 +160,6 @@ function visualizarOrcamentoEmNovaPagina() {
     span.className = campo.className;
     span.style.display = "inline-block";
     span.style.minWidth = "50px";
-    span.style.whiteSpace = "pre-wrap"; 
-
 
     campo.replaceWith(span);
   });
@@ -187,7 +185,7 @@ function visualizarOrcamentoEmNovaPagina() {
             margin: 0;
             padding: 40px;
             background: #f9f9f9;
-            transform: scale(0.95);
+            transform: scale(0.85);
             transform-origin: top left;
         }
         #orcamentoArea {
