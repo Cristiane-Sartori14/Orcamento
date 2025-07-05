@@ -246,18 +246,29 @@ tbody tr:hover {
   background-color: #004080;
 }
 
-@media print {
-  .botao {
-    display: none !important;
-  }
+  @media print {
+    body {
+      zoom: 75%; 
+    }
 
-  #orcamentoArea {
-    box-shadow: none;
-    border: none;
-  }
+    /* Oculta botões e elementos irrelevantes na impressão */
+    button, .botao, .apenas-edicao {
+      display: none !important;
+    }
 
-  body {
-    margin: 0;
-    padding: 0;
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+    }
+
+    #orcamentoArea {
+      margin: 0 auto;
+      box-shadow: none !important;
+      page-break-inside: avoid;
+    }
+
+    table, tr, td, th {
+      page-break-inside: avoid !important;
+    }
   }
-}

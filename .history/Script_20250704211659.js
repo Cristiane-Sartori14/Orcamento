@@ -70,41 +70,43 @@ function atualizarTotais() {
     const qtdInput = linha.querySelector(".qtd");
     const valorInput = linha.querySelector(".valor");
 
-    const qtd = parseFloat(qtdInput?.value.replace(",", ".") || 0);
-    const valor = parseFloat(valorInput?.value.replace(",", ".") || 0);
+    const qtd = parseFloat(qtdInput?.value.replace(',', '.') || 0);
+    const valor = parseFloat(valorInput?.value.replace(',', '.') || 0);
     const subtotal = qtd * valor;
 
     linha.querySelector(".subtotal").textContent = isNaN(subtotal)
       ? "0,00"
-      : subtotal.toFixed(2).replace(".", ",");
+      : subtotal.toFixed(2).replace('.', ',');
 
     total += isNaN(subtotal) ? 0 : subtotal;
   });
 
   document.getElementById("valorTotal").textContent = total
     .toFixed(2)
-    .replace(".", ",");
+    .replace('.', ',');
 }
 
+
 // Formatar valor com vírgula ao sair do campo
-document.querySelectorAll(".valor").forEach((input) => {
-  input.addEventListener("blur", () => {
-    const raw = input.value.replace(",", ".");
-    const val = parseFloat(raw);
-    if (!isNaN(val)) {
-      input.value = val.toFixed(2).replace(".", ",");
-    } else {
-      input.value = "0,00"; // evita ficar vazio
-    }
+ document.querySelectorAll(".valor").forEach((input) => {
+    input.addEventListener("blur", () => {
+      const raw = input.value.replace(',', '.');
+      const val = parseFloat(raw);
+      if (!isNaN(val)) {
+        input.value = val.toFixed(2).replace('.', ',');
+      } else {
+        input.value = '0,00'; // evita ficar vazio
+      }
+    });
   });
-});
+
 
 function adicionarProduto() {
   const linha = document.createElement("tr");
   linha.innerHTML = `
-    <td><input type="number" class="qtd" value="1" min="1" /></td>
+  <td><input type="text" class="valor" value="0,00" /></td>
     <td><input type="text" class="descricao" placeholder="Descrição do produto" /></td>
-    <td><input type="text" class="valor" value="0,00" /></td>
+    <td><input type="number" class="valor" value="0.00" step="0.01" /></td>
     <td class="subtotal">0,00</td>
   `;
   document.getElementById("corpoTabela").appendChild(linha);
@@ -112,22 +114,22 @@ function adicionarProduto() {
   const qtdInput = linha.querySelector(".qtd");
   const valorInput = linha.querySelector(".valor");
 
-  // Recalcula sempre que mudar quantidade ou valor
   qtdInput.addEventListener("input", atualizarTotais);
-  valorInput.addEventListener("input", atualizarTotais);
+  valorInput.addEventListener("input", atualizarTotais); // <--- ESSA LINHA FALTAVA!
 
-  // Formata e atualiza ao sair do campo valor
   valorInput.addEventListener("blur", () => {
-    const raw = valorInput.value.replace(",", ".");
+    const raw = valorInput.value.replace(',', '.');
     const val = parseFloat(raw);
     if (!isNaN(val)) {
-      valorInput.value = val.toFixed(2).replace(".", ",");
+      valorInput.value = val.toFixed(2).replace('.', ',');
     } else {
-      valorInput.value = "0,00";
+      valorInput.value = '0,00';
     }
-    atualizarTotais();
+
+    atualizarTotais(); // <- Garante que atualiza depois de formatar!
   });
 }
+
 
 function visualizarOrcamentoEmNovaPagina() {
   const original = document.getElementById("orcamentoArea");
@@ -147,8 +149,8 @@ function visualizarOrcamentoEmNovaPagina() {
       span.textContent = campo.options[campo.selectedIndex]?.text || "";
     } else if (campo.classList.contains("valor")) {
       // valor unitário: força 2 casas e vírgula
-      const val = parseFloat(campo.value.replace(",", ".")) || 0;
-      span.textContent = val.toFixed(2).replace(".", ",");
+      const val = parseFloat(campo.value.replace(',', '.')) || 0;
+      span.textContent = val.toFixed(2).replace('.', ',');
     } else if (campo.classList.contains("qtd")) {
       // quantidade: mostra como inteiro
       span.textContent = parseInt(campo.value, 10);
@@ -181,12 +183,10 @@ function visualizarOrcamentoEmNovaPagina() {
       <link rel="stylesheet" href="Styles.css">
       <style>
         body {
-            font-family: "Segoe UI", sans-serif;
-            margin: 0;
-            padding: 40px;
-            background: #f9f9f9;
-            transform: scale(0.85);
-            transform-origin: top left;
+          font-family: "Segoe UI", sans-serif;
+          margin: 0;
+          padding: 40px;
+          background: #f9f9f9;
         }
         #orcamentoArea {
           box-shadow: 0 0 10px rgba(0,0,0,0.1);

@@ -70,34 +70,35 @@ function atualizarTotais() {
     const qtdInput = linha.querySelector(".qtd");
     const valorInput = linha.querySelector(".valor");
 
-    const qtd = parseFloat(qtdInput?.value.replace(",", ".") || 0);
-    const valor = parseFloat(valorInput?.value.replace(",", ".") || 0);
+    const qtd = parseFloat(qtdInput?.value.replace(',', '.') || 0);
+    const valor = parseFloat(valorInput?.value.replace(',', '.') || 0);
     const subtotal = qtd * valor;
 
     linha.querySelector(".subtotal").textContent = isNaN(subtotal)
       ? "0,00"
-      : subtotal.toFixed(2).replace(".", ",");
+      : subtotal.toFixed(2).replace('.', ',');
 
     total += isNaN(subtotal) ? 0 : subtotal;
   });
 
   document.getElementById("valorTotal").textContent = total
     .toFixed(2)
-    .replace(".", ",");
+    .replace('.', ',');
 }
 
+
 // Formatar valor com vírgula ao sair do campo
-document.querySelectorAll(".valor").forEach((input) => {
-  input.addEventListener("blur", () => {
-    const raw = input.value.replace(",", ".");
-    const val = parseFloat(raw);
-    if (!isNaN(val)) {
-      input.value = val.toFixed(2).replace(".", ",");
-    } else {
-      input.value = "0,00"; // evita ficar vazio
-    }
+ document.querySelectorAll(".valor").forEach((input) => {
+    input.addEventListener("blur", () => {
+      const raw = input.value.replace(',', '.');
+      const val = parseFloat(raw);
+      if (!isNaN(val)) {
+        input.value = val.toFixed(2).replace('.', ',');
+      } else {
+        input.value = '0,00'; // evita ficar vazio
+      }
+    });
   });
-});
 
 function adicionarProduto() {
   const linha = document.createElement("tr");
@@ -118,16 +119,18 @@ function adicionarProduto() {
 
   // Formata e atualiza ao sair do campo valor
   valorInput.addEventListener("blur", () => {
-    const raw = valorInput.value.replace(",", ".");
+    const raw = valorInput.value.replace(',', '.');
     const val = parseFloat(raw);
     if (!isNaN(val)) {
-      valorInput.value = val.toFixed(2).replace(".", ",");
+      valorInput.value = val.toFixed(2).replace('.', ',');
     } else {
-      valorInput.value = "0,00";
+      valorInput.value = '0,00';
     }
     atualizarTotais();
   });
 }
+
+
 
 function visualizarOrcamentoEmNovaPagina() {
   const original = document.getElementById("orcamentoArea");
@@ -147,8 +150,8 @@ function visualizarOrcamentoEmNovaPagina() {
       span.textContent = campo.options[campo.selectedIndex]?.text || "";
     } else if (campo.classList.contains("valor")) {
       // valor unitário: força 2 casas e vírgula
-      const val = parseFloat(campo.value.replace(",", ".")) || 0;
-      span.textContent = val.toFixed(2).replace(".", ",");
+      const val = parseFloat(campo.value.replace(',', '.')) || 0;
+      span.textContent = val.toFixed(2).replace('.', ',');
     } else if (campo.classList.contains("qtd")) {
       // quantidade: mostra como inteiro
       span.textContent = parseInt(campo.value, 10);
@@ -181,12 +184,10 @@ function visualizarOrcamentoEmNovaPagina() {
       <link rel="stylesheet" href="Styles.css">
       <style>
         body {
-            font-family: "Segoe UI", sans-serif;
-            margin: 0;
-            padding: 40px;
-            background: #f9f9f9;
-            transform: scale(0.85);
-            transform-origin: top left;
+          font-family: "Segoe UI", sans-serif;
+          margin: 0;
+          padding: 40px;
+          background: #f9f9f9;
         }
         #orcamentoArea {
           box-shadow: 0 0 10px rgba(0,0,0,0.1);
